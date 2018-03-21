@@ -1,0 +1,3 @@
+rootProject.name = 'PlayDateMate3'
+
+include ':app'
