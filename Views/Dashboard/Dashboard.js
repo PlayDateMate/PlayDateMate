@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import {StackNavigator, DrawerNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Body, Title, Right} from 'native-base'
 
 
 import{
@@ -11,16 +11,23 @@ import{
 
 
 export default class Dashboard extends Component{
+  
     render(){
         return(
             
             <Container >
-                <Header>
+                <Header style = {styles.dashboardheader}>
                     <Left >
                     <Icon name = "ios-menu" onPress = {()=>{
                     this.props.navigation.navigate('DrawerOpen')
                 }}/>
                     </Left>
+                    <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            
+          </Right>
                 </Header>
                 <Content contentContainerStyle ={{
                 flex: 1,
@@ -33,4 +40,10 @@ export default class Dashboard extends Component{
         )
     }
 }
+const styles = StyleSheet.create({
+    dashboardheader:{
+        backgroundColor: 'lightgrey',
+        justifyContent: 'flex-start'
+    }
+})
 
