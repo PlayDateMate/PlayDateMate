@@ -17,22 +17,35 @@ import {
 export default class App extends Component {
   render() {
     return (
-      <AppNavigator/>
+      
+      <AppDrawerNavigator/>
+      // <AppNavigator/>
+      
     );
   }
 }
 
-const AppNavigator = StackNavigator({
-  Login: {screen: Login},
-  Dashboard:{screen: Dashboard},
-  Events:{screen: Events},
-  Friends:{screen: Friends}
-  });
-//   const AppDrawerNavigator = DrawerNavigator({
-//     Login: {screen: Login},
-//     Profile:{screen:Profile},
-//     Events: {screen:Events},
-//     Friends:{screen: Friends},
-//     Dashboard:{screen:Dashboard}
+// const AppNavigator = StackNavigator({
+//   Login: {screen: Login},
+//   Dashboard:{screen: Dashboard,
+//     navigationOptions:{
+//       header:null
+//     }},
+//   Events:{screen: Events},
+//   Friends:{screen: Friends}
+//   },
+//   {
+//     headerMode: 'none',
+//     navigationOptions: {
+//         headerVisible: false,
+//     }
+//   });
 
-// })
+  const AppDrawerNavigator = DrawerNavigator({
+    Login:{screen: Login},
+    Profile:{screen:Profile},
+    Events: {screen:Events},
+    Friends:{screen: Friends},
+    Dashboard:{screen:Dashboard}
+
+})

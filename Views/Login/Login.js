@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+import {StackNavigator} from 'react-navigation';
 import Dashboard from '../Dashboard/Dashboard'
 import Profile from '../Profile/Profile'
 import Friends from '../Friends/Friends'
 import Events from '../Events/Events'
+import {Icon, Container, Header, Content, Left} from 'native-base'
+
+
 
 
 import{
@@ -14,16 +17,26 @@ import{
 } from 'react-native';
 
 
-export default class Login extends Component{
+export class Login extends Component{
+    static navigationOptions ={
+        drawerLabel: ()=>null
+    }
     render(){
         return(
-            <View>
-                <Text>This is the login screen</Text>
-                <Button onPress = {()=>{this.props.navigation.navigate('Dashboard')}} title="Login"></Button>
-            </View>
+           <Container>
+               <Content contentContainerStyle ={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <Button onPress = {()=>{this.props.navigation.navigate('Dashboard')}} title = {'Login'}>
+                </Button>
+               </Content>
+           </Container>
         )
     }
 }
+
 
 const LoginScreenStackNavigator = StackNavigator({
     Login:{
@@ -43,12 +56,6 @@ const LoginScreenStackNavigator = StackNavigator({
         
     });
 
-const AppDrawerNavigator = DrawerNavigator({
-    Profile:{screen:Profile},
-    Events: {screen:Events},
-    Friends:{screen: Friends},
-    Dashboard:{screen:Dashboard}
-
-})
+export default LoginScreenStackNavigator;
      
     

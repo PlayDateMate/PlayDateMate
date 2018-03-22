@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+// import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import {Icon, Button, Container, Header, Content, Left} from 'native-base'
 
 
@@ -16,24 +16,29 @@ export default class Dashboard extends Component{
         return(
             
             <Container >
-                <Header style={{backgroundColor: 'gray', display: 'flex'}}>
-                    <Left style={{justifyContent:'flex-start'}
-                        
-                } >
-                        <Icon 
-                        
-                        name = "ios-menu" on Press = {()=>{
-                            this.props.navigation.navigate('DrawerOpen')
-                        }}/>
+                <Header style={styles.dashboardheader}>
+                    <Left  >
+                    <Icon name = "ios-menu" onPress = {()=>{
+                    this.props.navigation.navigate('DrawerOpen')
+                }}/>
                     </Left>
                 </Header>
-                <View>
-                    
-                    <TextInput placeholder='Enter your name!' style={{backgroundColor: 'red'}}></TextInput>
-                    
-                </View>
+                <Content contentContainerStyle ={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <Text>Dashboard</Text>
+            </Content>
             </Container>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    dashboardheader:{
+        backgroundColor: 'lightgrey',
+        justifyContent: 'flex-start'
+    }
+})
 
