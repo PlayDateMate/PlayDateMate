@@ -15,8 +15,8 @@ export default class Dashboard extends Component{
         return(
             
             <Container >
-                <Header>
-                    <Left >
+                <Header style={styles.dashboardheader}>
+                    <Left  >
                     <Icon name = "ios-menu" onPress = {()=>{
                     this.props.navigation.navigate('DrawerOpen')
                 }}/>
@@ -33,4 +33,11 @@ export default class Dashboard extends Component{
         )
     }
 }
+
+const styles = StyleSheet.create({
+    dashboardheader:{
+        backgroundColor: 'lightgrey',
+        justifyContent: 'flex-start'
+    }
+})
 
