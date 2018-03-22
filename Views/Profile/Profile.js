@@ -61,7 +61,7 @@ onSave(){
             }}>
             <View >
                 {this.state.profilePicture ?
-                <Image source={this.state.profilePicture}  style={{ borderWidth:.5, borderColor:'gray',  borderRadius: 200, width: 125, margin: 50, alignItems:'center', height: 125, justifyContent:'center'}}></Image>
+                <Image source={this.state.profilePicture}  style={{ borderWidth:.5, borderColor:'gray',  borderRadius: 60, width: 125, margin: 50, alignItems:'center', height: 125, justifyContent:'center'}}></Image>
                 :
                 <Icon name="add-user"/>}
                
