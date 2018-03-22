@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Right, Body, Title} from 'native-base'
 
 
 import{
@@ -20,6 +20,12 @@ export default class Friends extends Component{
                     this.props.navigation.navigate('DrawerOpen')
                 }}/>
                     </Left>
+                    <Body>
+                        <Title>Friends</Title>
+                    </Body>
+                    <Right>
+            
+                    </Right>
                 </Header>
                 <Content contentContainerStyle ={{
                 flex: 1,

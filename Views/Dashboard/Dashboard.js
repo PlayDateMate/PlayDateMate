@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import {StackNavigator, DrawerNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Body, Right, Title} from 'native-base'
 
 
 import{
@@ -21,6 +21,12 @@ export default class Dashboard extends Component{
                     this.props.navigation.navigate('DrawerOpen')
                 }}/>
                     </Left>
+                    <Body>
+                        <Title>Dashboard</Title>
+                    </Body>
+                    <Right>
+            
+                    </Right>
                 </Header>
                 <Content contentContainerStyle ={{
                 flex: 1,
