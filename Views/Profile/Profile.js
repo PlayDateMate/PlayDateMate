@@ -1,17 +1,43 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left, Body, Title, Right} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Body, Title, Right,} from 'native-base'
 
 
 
 import{
     StyleSheet, 
     Text,
-    View
+    View, 
+    TextInput,
+    Image
 } from 'react-native';
 
 
 export default class Profile extends Component{
+    constructor(){
+        super();
+        this.state={
+            name: '',
+            zip: '',
+            email: '',
+            profilePicture: require('../../images/login2.jpg'),
+            canEdit: false
+        }
+        this.onEdit = this.onEdit.bind(this);
+        this.onSave = this.onSave.bind(this);
+    }
+onEdit(){
+    console.log("clicked")
+    this.setState({
+        canEdit: true
+    })
+}
+onSave(){
+    console.log("Saved")
+    this.setState({
+        canEdit:false
+    })
+}
     render(){
         return(
             <Container >
@@ -31,9 +57,40 @@ export default class Profile extends Component{
                 <Content contentContainerStyle ={{
                 flex: 1,
                 alignItems: 'center',
-                justifyContent: 'center'
+                
             }}>
-                <Text>Profile</Text>
+            <View >
+                {this.state.profilePicture ?
+                <Image source={this.state.profilePicture}  style={{ borderWidth:.5, borderColor:'gray',  borderRadius: 200, width: 125, margin: 50, alignItems:'center', height: 125, justifyContent:'center'}}></Image>
+                :
+                <Icon name="add-user"/>}
+               
+                {this.state.canEdit ?
+                <View>
+                <Text >Name</Text>
+                <TextInput></TextInput>
+                <Text>Address</Text>
+                <TextInput></TextInput>
+                <Text>About</Text>
+                <TextInput></TextInput>
+                </View>
+            :
+            <View>
+                <Text >Name</Text>
+                
+                <Text>Address</Text>
+                
+                <Text>About</Text>
+               
+                </View>
+            }
+            </View>
+            
+
+            <View>
+                {this.state.canEdit ? <Text onPress={()=>this.onSave()}>Save</Text> : <Text onPress={()=>this.onEdit()}>Edit</Text>}
+                
+            </View>
             </Content>
             </Container>
         )
