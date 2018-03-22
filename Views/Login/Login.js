@@ -4,7 +4,8 @@ import Dashboard from '../Dashboard/Dashboard'
 import Profile from '../Profile/Profile'
 import Friends from '../Friends/Friends'
 import Events from '../Events/Events'
-import {Icon, Container, Header, Content, Left} from 'native-base'
+import {Icon, Container, Header, Content, Left} from 'native-base';
+
 
 
 

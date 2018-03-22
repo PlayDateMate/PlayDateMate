@@ -19,6 +19,7 @@ import{
 
 
 export default class Dashboard extends Component{
+
     constructor(){
         super();
         this.state = {
@@ -27,6 +28,9 @@ export default class Dashboard extends Component{
             children: ''
         }
     }
+
+  
+
     render(){
         return(
             
@@ -101,7 +105,6 @@ export default class Dashboard extends Component{
         )
     }
 }
-
 const styles = StyleSheet.create({
     dashboardheader:{
         backgroundColor: 'lightgrey',
@@ -114,4 +117,6 @@ const styles = StyleSheet.create({
     
 
 })
+
+
 
