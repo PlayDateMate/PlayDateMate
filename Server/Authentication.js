@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 
-import Auth0 from 'react-native-auth0';//from auth0
+import Auth0 from 'react-native-auth0';
 
 var credentials = require('./auth0-credentials');
 
@@ -29,13 +29,13 @@ export default class PlayDateMate extends Component {
     let loggedIn = this.state.accessToken === null ? false : true;
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.header}>Auth0Sample - Login</Text> */}
-        {/* <Text>
+         <Text style={styles.header}>Auth0Sample - Login</Text> 
+         <Text>
           You are {loggedIn ? '' : 'not '}logged in.
-        </Text> */}
+        </Text> 
         <Button
           onPress={loggedIn ? this._onLogout : this._onLogin}
-          title={loggedIn ? 'Log Out' : 'Log In'}
+          title={loggedIn ? 'Log Out' : 'test'}
         />
       </View>
     );

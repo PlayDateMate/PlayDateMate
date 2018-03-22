@@ -39,7 +39,7 @@ export class Login extends Component {
             })
             .then(credentials => {
                 this.setState({ accessToken: credentials.accessToken });
-                this.props.navigation.navigate('Authentication') 
+                this.props.navigation.navigate('Dashboard') 
             })
             .catch(error => {
                 console.log(error)
@@ -71,7 +71,7 @@ export class Login extends Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}>
-                        <Button onPress={() => this._onLogin()} title={'Login'}>
+                        <Button onPress={() => this._onLogin()} title={'Log in'}>
                         </Button>
                     </Content>
 
@@ -81,7 +81,7 @@ export class Login extends Component {
                         You are {loggedIn ? '' : 'not '}logged in.
                     </Text>
                     <Button
-                    onPress={loggedIn ? this._onLogout : this._onLogin}
+                    onPress={ () => loggedIn ? this._onLogout : this._onLogin}
                     title={loggedIn ? 'Log Out' : 'Log In'}
                     />
                     {/* code above new stuff on auth0 */}
