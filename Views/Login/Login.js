@@ -14,7 +14,8 @@ import{
     StyleSheet, 
     Text,
     View,
-    Button
+    Button,
+    ImageBackground
 } from 'react-native';
 
 
@@ -24,6 +25,7 @@ export class Login extends Component{
     }
     render(){
         return(
+            <ImageBackground style={{flex:1}} source={require('../../images/login2.jpg')}>
            <Container>
                <Content contentContainerStyle ={{
                 flex: 1,
@@ -34,6 +36,7 @@ export class Login extends Component{
                 </Button>
                </Content>
            </Container>
+           </ImageBackground>
         )
     }
 }
