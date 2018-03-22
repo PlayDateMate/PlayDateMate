@@ -7,6 +7,7 @@ import{
     StyleSheet, 
     Text,
     View,
+    TextInput
 } from 'react-native';
 
 
@@ -15,8 +16,10 @@ export default class Dashboard extends Component{
         return(
             
             <Container >
-                <Header>
-                    <Left >
+                <Header style={{backgroundColor: 'gray', display: 'flex'}}>
+                    <Left style={{justifyContent:'flex-start'}
+                        
+                } >
                         <Icon 
                         
                         name = "ios-menu" on Press = {()=>{
@@ -24,6 +27,11 @@ export default class Dashboard extends Component{
                         }}/>
                     </Left>
                 </Header>
+                <View>
+                    
+                    <TextInput placeholder='Enter your name!' style={{backgroundColor: 'red'}}></TextInput>
+                    
+                </View>
             </Container>
         )
     }

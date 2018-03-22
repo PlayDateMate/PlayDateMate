@@ -4,6 +4,7 @@ import Dashboard from './Views/Dashboard/Dashboard.js';
 import Events from './Views/Events/Events.js';
 import Friends from './Views/Friends/Friends.js';
 import Login from './Views/Login/Login';
+import Profile from './Views/Profile/Profile'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
   Platform,
@@ -27,3 +28,11 @@ const AppNavigator = StackNavigator({
   Events:{screen: Events},
   Friends:{screen: Friends}
   });
+//   const AppDrawerNavigator = DrawerNavigator({
+//     Login: {screen: Login},
+//     Profile:{screen:Profile},
+//     Events: {screen:Events},
+//     Friends:{screen: Friends},
+//     Dashboard:{screen:Dashboard}
+
+// })
