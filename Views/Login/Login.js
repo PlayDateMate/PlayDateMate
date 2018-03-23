@@ -7,6 +7,7 @@ import Events from '../Events/Events'
 import Authentication from '../../Server/Authentication'
 import { Icon, Container, Header, Content, Left } from 'native-base';
 import Auth0 from 'react-native-auth0';//from auth0
+import axios from 'axios';
 
 var credentials = require('./../../Server/auth0-credentials');
 
@@ -39,7 +40,11 @@ export class Login extends Component {
             })
             .then(credentials => {
                 this.setState({ accessToken: credentials.accessToken });
-                this.props.navigation.navigate('Dashboard') 
+                console.log(credentials);
+                axios.post('http://192.168.3.177:3001/api/auth', {token: credentials.idToken}).then( (response)=> {
+                    console.log(response.data)
+                }) 
+                this.props.navigation.navigate('Dashboard')
             })
             .catch(error => {
                 console.log(error)
