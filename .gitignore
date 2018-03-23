@@ -53,3 +53,5 @@ buck-out/
 */fastlane/screenshots
 
 .env
+
+Server/auth0-credentials.js
