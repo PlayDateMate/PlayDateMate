@@ -8,10 +8,13 @@ const session = require('express-session');
 const massive = require('massive');
 const axios = require('axios');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+// const user_controller = require('./user_controller');
 
 const  {
     SERVER_PORT,
-    SESSION_SECRET, 
+    SESSION_SECRET,
+    JWT_SECRET, 
     DOMAIN, 
     CLIENT_ID, 
     CLIENT_SECRET, 
@@ -34,66 +37,45 @@ app.use(session({
     saveUninitialized: true
 }))
 
-// app.use(passport.initialize() );
-// app.use(passport.session() );
+//connecting server to database using massive
+massive(CONNECTION_STRING).then(db => {
+    app.set('db', db);
+    console.log("db connected");
+}).catch(console.log)
 
-// massive(CONNECTION_STRING).then(db => {
-//     app.set('db', db);
-// })
+//Auth login endpoints
+app.post('/api/auth', (req, res) => {
+    jwt.verify(req.body.token, CLIENT_SECRET, (err, decoded) => {
+        // console.log('test', req.body.token);
+        console.log(err);
+        console.log(decoded);
+        let db = app.get('db');
+        if (err){
+            console.log('Authorization failed', err);
+            next(err);
+        }
+        let { user_name, email, sub } = decoded;
+        db.find_user([sub]).then((resp) => {
+            let user = resp[0];
+            let id = '';
+            if (!user){
+                ( async => {
+                    id = db.create_user([user_name, email, sub ]);
+                    let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
+                    res.status(200).send(token);
+                })() 
+            } else {
+                id = user.id;
+                let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
+                res.status(200).send(token);
+            }
+        })
+        
+    })
+})
 
-// passport.use(new Auth0Strategy({
-//     domain: DOMAIN, 
-//     clientID: CLIENT_ID,  
-//     clientSecret: CLIENT_SECRET, 
-//     callbackURL: CALLBACK_URL, 
-//     scope: 'openid profile'
-// }, function(accessToken, refreshToken, extraParams, profile, done){
-//     const db = app.get('db');
-//     const { sub } = profile._json;
-//     db.find_user([sub]).then( response => {
-//         console.log(sub)
-//         if(response[0]){
-//             done(null, response[0].id)
-//         }else{
-//             db.create_user([ sub ]).then( response => {
-//                 done(null, response[0].id)
-//             })
-//         }
-//     })
-// }))
 
-// passport.serializeUser( (id, done)=> {
-//     done(null, id);
-// })
-
-// passport.deserializeUser( (id, done) =>{
-//     const db = app.get('db');
-//     console.log(id)
-//     db.find_logged_in_user([id]).then( response => {
-//         done(null, response[0])  
-//     })
-// })
-
-// app.get('/auth', passport.authenticate('auth0'));
-// app.get('/auth/callback', passport.authenticate('auth0', {
-//     successRedirect: process.env.CHECK_USER
-// }))
-
-// app.get('/auth/me', (req, res) => {
-//     if(!req.user){
-//         res.status(404).send('Not logged in!');
-//     }else{
-//         res.status(200).send(req.user);
-//     }
-// })
-
-// app.get('/logout', (req,res) => {
-//     req.logout(); 
-//     res.redirect(process.env.LOCAL_HOME)
-// });
-
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
+//================user endpoints===============
+// app.post('/api/user', user_controller.addUser)
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
