@@ -76,14 +76,14 @@ export class Login extends Component {
                     </Content>
 
                     {/* code below new stuff on auth0 */}
-                    <Text style={styles.header}>PlayDateMate - Login</Text>
+                    {/* <Text style={styles.header}>PlayDateMate - Login</Text>
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
-                    </Text>
-                    <Button
+                    </Text> */}
+                    {/* <Button
                     onPress={ () => loggedIn ? this._onLogout : this._onLogin}
                     title={loggedIn ? 'Log Out' : 'Log In'}
-                    />
+                    /> */}
                     {/* code above new stuff on auth0 */}
 
                 </Container>
