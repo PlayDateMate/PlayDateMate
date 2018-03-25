@@ -45,6 +45,7 @@ massive(CONNECTION_STRING).then(db => {
 
 //Auth login endpoints
 app.post('/api/auth', (req, res) => {
+    console.log(req.body.token);
     jwt.verify(req.body.token, CLIENT_SECRET, (err, decoded) => {
         // console.log('test', req.body.token);
         console.log(err);
@@ -59,11 +60,13 @@ app.post('/api/auth', (req, res) => {
             let user = resp[0];
             let id = '';
             if (!user){
-                ( async => {
-                    id = db.create_user([user_name, email, sub ]);
-                    let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                    res.status(200).send(token);
-                })() 
+                
+                    db.create_user([user_name, email, sub ]).then( (response) => {
+                        id = response[0].id
+                        let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
+                        res.status(200).send(token);
+                    });
+                
             } else {
                 id = user.id;
                 let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
