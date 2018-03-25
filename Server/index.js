@@ -23,6 +23,7 @@ const  {
 
 } = process.env;
 
+
 const app = express();
 
 app.use(express.static(__dirname + "/../build"));
@@ -44,28 +45,33 @@ massive(CONNECTION_STRING).then(db => {
 }).catch(console.log)
 
 //Auth login endpoints
-app.post('/api/auth', (req, res) => {
-    jwt.verify(req.body.token, CLIENT_SECRET, (err, decoded) => {
-        // console.log('test', req.body.token);
-        console.log(err);
-        console.log(decoded);
+app.post('/api/auth',  (req, res) => {
+    
+    jwt.verify(req.body.token, CLIENT_SECRET, {algorithm: 'HS256'},  (err, decoded) => {
+        console.log('HELP!!!', decoded, CLIENT_SECRET);
         let db = app.get('db');
         if (err){
             console.log('Authorization failed', err);
             next(err);
         }
-        let { user_name, email, sub } = decoded;
-        db.find_user([sub]).then((resp) => {
+        let { name, email, sub } = decoded;
+        
+         db.find_user([sub]).then(async (resp) => {
+            
             let user = resp[0];
             let id = '';
-            if (!user){
-                ( async => {
-                    id = db.create_user([user_name, email, sub ]);
+            if  (!user) {
+                 
+                    console.log("are we getting here?", decoded)
+                    id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
+                            console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                    res.status(200).send(token);
-                })() 
+                    res.status(200).send(token)
+                
             } else {
+                
                 id = user.id;
+                console.log('are we hitting this?', id)
                 let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
                 res.status(200).send(token);
             }
@@ -77,5 +83,13 @@ app.post('/api/auth', (req, res) => {
 
 //================user endpoints===============
 // app.post('/api/user', user_controller.addUser)
+// app.get('/api/getUser', (req,res)=>{
+//     let db = app.get('db');
+//     console.log('id check',decoded)
+//     db.find_user([user.id]).then(response =>{
+//         res.status(200).send({response})
+//     })
+   
+// })
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))

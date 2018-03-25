@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left, Body, Title, Right,} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Body, Title, Right,} from 'native-base';
+const axios = require('axios');
 
 
 
@@ -26,6 +27,14 @@ export default class Profile extends Component{
         this.onEdit = this.onEdit.bind(this);
         this.onSave = this.onSave.bind(this);
     }
+    // componentDidMount(){
+    //     axios.get('http://172.16.1.43:3001/api/getUser',(req,res)=>{
+    //         this.setState({
+    //             name: res.data.user_name,
+    //             profilePicture: res.data.image
+    //         })
+    //     })
+    // }
 onEdit(){
     console.log("clicked")
     this.setState({
