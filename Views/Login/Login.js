@@ -6,7 +6,8 @@ import Friends from '../Friends/Friends'
 import Events from '../Events/Events'
 import Authentication from '../../Server/Authentication'
 import { Icon, Container, Header, Content, Left } from 'native-base';
-import Auth0 from 'react-native-auth0';//from auth0
+import Auth0 from 'react-native-auth0';//from 
+import axios from 'axios'
 
 var credentials = require('./../../Server/auth0-credentials');
 
@@ -39,6 +40,10 @@ export class Login extends Component {
             })
             .then(credentials => {
                 this.setState({ accessToken: credentials.accessToken });
+                console.log(credentials.idToken)
+                axios.post('http://192.168.3.135.3001/api/auth', {accessToken: credentials.idToken}).then( (response)=> {
+                    console.log(credentials.idToken)
+                })
                 this.props.navigation.navigate('Dashboard') 
             })
             .catch(error => {
@@ -76,14 +81,14 @@ export class Login extends Component {
                     </Content>
 
                     {/* code below new stuff on auth0 */}
-                    <Text style={styles.header}>PlayDateMate - Login</Text>
+                    {/* <Text style={styles.header}>PlayDateMate - Login</Text>
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
                     </Text>
                     <Button
                     onPress={ () => loggedIn ? this._onLogout : this._onLogin}
                     title={loggedIn ? 'Log Out' : 'Log In'}
-                    />
+                    /> */}
                     {/* code above new stuff on auth0 */}
 
                 </Container>
