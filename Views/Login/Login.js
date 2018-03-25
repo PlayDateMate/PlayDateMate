@@ -6,8 +6,8 @@ import Friends from '../Friends/Friends'
 import Events from '../Events/Events'
 import Authentication from '../../Server/Authentication'
 import { Icon, Container, Header, Content, Left } from 'native-base';
-import Auth0 from 'react-native-auth0';//from 
-import axios from 'axios'
+import Auth0 from 'react-native-auth0';//from auth0
+import axios from 'axios';
 
 var credentials = require('./../../Server/auth0-credentials');
 
@@ -36,18 +36,19 @@ export class Login extends Component {
         auth0.webAuth
             .authorize({
                 scope: 'openid profile',
-                audience: 'https://' + credentials.domain + '/userinfo'
+                // audience: 'https://' + credentials.domain + '/userinfo'
             })
             .then(credentials => {
+                console.log('Test')
                 this.setState({ accessToken: credentials.accessToken });
-                console.log(credentials.idToken)
-                axios.post('http://192.168.3.135.3001/api/auth', {accessToken: credentials.idToken}).then( (response)=> {
-                    console.log(credentials.idToken)
-                })
-                this.props.navigation.navigate('Dashboard') 
+                console.log(credentials);
+                axios.post('http://172.16.1.43:3001/api/auth', {token: credentials.idToken}).then( (response)=> {
+                    console.log(response.data)
+                }) 
+                this.props.navigation.navigate('Dashboard')
             })
             .catch(error => {
-                console.log(error)
+                console.log("error check",error)
             });
 
     };
@@ -76,7 +77,7 @@ export class Login extends Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}>
-                        <Button onPress={() => this._onLogin()} title={'Log in'}>
+                        <Button onPress={() => this._onLogin()} title={'Login'}>
                         </Button>
                     </Content>
 
@@ -85,7 +86,7 @@ export class Login extends Component {
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
                     </Text>
-                    <Button
+                    {/* <Button
                     onPress={ () => loggedIn ? this._onLogout : this._onLogin}
                     title={loggedIn ? 'Log Out' : 'Log In'}
                     /> */}
@@ -118,14 +119,15 @@ const LoginScreenStackNavigator = StackNavigator({
     Login: {
         screen: Login
     },
-    Authentication: {
-        screen: Authentication
-    },
+   
     Dashboard: {
         screen: Dashboard,
         navigationOptions: {
             header: null,
         }
+    },
+    Authentication: {
+        screen: Authentication
     }
 },
     {

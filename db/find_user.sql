@@ -1,2 +1,2 @@
-SELECT * FROM users
-WHERE $1 = auth_id;
+-- select * from users
+-- where auth_id = $1;

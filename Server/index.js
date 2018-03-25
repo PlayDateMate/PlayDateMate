@@ -8,12 +8,13 @@ const session = require('express-session');
 const massive = require('massive');
 const axios = require('axios');
 const path = require('path');
-const jwt = require('jsonwebtoken')
-
+const jwt = require('jsonwebtoken');
+// const user_controller = require('./user_controller');
 
 const  {
     SERVER_PORT,
-    SESSION_SECRET, 
+    SESSION_SECRET,
+    JWT_SECRET, 
     DOMAIN, 
     CLIENT_ID, 
     CLIENT_SECRET, 
@@ -22,6 +23,7 @@ const  {
     JWT_SECRET
 
 } = process.env;
+
 
 const app = express();
 
@@ -40,36 +42,27 @@ app.use(session({
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db);
     console.log("db connected");
- }).catch(console.log)
-
-// Auth login endpoints
-app.post('/api/auth', (req, res) => {
-    console.log('HIT!!!')
-    jwt.verify(req.body.accessToken, CLIENT_SECRET, (err, decoded) => {
-        console.log('clientSecret:', CLIENT_SECRET)
-        let db = app.get('db');
-        if (err){
             console.log('Authorization failed', err);
             next(err);
         }
-        let { user_name, email, sub } = decoded;
-        db.find_user([sub]).then((resp) => {
+        
+         db.find_user([sub]).then(async (resp) => {
+            
             let user = resp[0];
             let id = '';
-            if (!user){
-               db.create_user([user_name, email, sub]).then((response) => {
-                    id - response[0].id
+            if  (!user) {
+                 
+                    console.log("are we getting here?", decoded)
+                    id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
+                            console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                    res.status(200).send(token);
-               });
-            } else {
-                id = user.id;
-                let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                res.status(200).send(token);
-            }
-        })
-        
-    })
-})
+//     let db = app.get('db');
+//     console.log('id check',decoded)
+//     db.find_user([user.id]).then(response =>{
+//         res.status(200).send({response})
+//     })
+   
+// })
 
+// >>>>>>> master
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
