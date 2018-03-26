@@ -28,7 +28,8 @@ export class Login extends Component {
     }
     constructor(props) {
         super(props);
-        this.state = {accessToken: null}
+        this.state = {accessToken: null,
+        userId: ''}
     }
 
     //code below is auth0 stuff
@@ -38,14 +39,20 @@ export class Login extends Component {
                 scope: 'openid profile',
                 // audience: 'https://' + credentials.domain + '/userinfo'
             })
-            .then(credentials => {
-                console.log('Test')
+            .then( async credentials => {
+                
                 this.setState({ accessToken: credentials.accessToken });
                 console.log(credentials);
-                axios.post('http://192.168.3.177:3001/api/auth', {token: credentials.idToken}).then( (response)=> {
-                    console.log(response.data)
+
+                 await axios.post('http://192.168.3.177:3001/api/auth', {token: credentials.idToken}).then(  (response)=> {
+                    console.log("where is this",response.data.id)
+                      this.setState({
+                        userId:response.data.id
+                    })
+
                 }) 
-                this.props.navigation.navigate('Dashboard')
+                console.log("state", this.state.userId)
+                this.props.navigation.navigate('Dashboard', {id:this.state.userId})
             })
             .catch(error => {
                 console.log("error check",error)
@@ -82,7 +89,7 @@ export class Login extends Component {
                     </Content>
 
                     {/* code below new stuff on auth0 */}
-                    <Text style={styles.header}>PlayDateMate - Login</Text>
+                    {/* <Text style={styles.header}>PlayDateMate - Login</Text>
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
                     </Text>

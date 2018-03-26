@@ -6,6 +6,9 @@ import Friends from './Views/Friends/Friends.js';
 import Login from './Views/Login/Login';
 import Profile from './Views/Profile/Profile';
 import Chat from './Views/Chat/Chat'
+import FriendSearch from './Views/Friends/FriendSearch'
+import EventSearch from './Views/Events/EventSearch'
+
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
   Platform,
@@ -16,6 +19,7 @@ import {
 
 
 export default class App extends Component {
+
   render() {
     return (
       
@@ -48,6 +52,8 @@ export default class App extends Component {
     Events: {screen:Events},
     Friends:{screen: Friends},
     Dashboard:{screen:Dashboard},
-    Chat:{screen: Chat}
-
+    Chat:{screen: Chat},
+    FriendSearch:{screen: FriendSearch},
+    
+    EventSearch: {screen: EventSearch},
 })

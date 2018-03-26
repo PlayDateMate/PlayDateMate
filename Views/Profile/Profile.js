@@ -27,14 +27,15 @@ export default class Profile extends Component{
         this.onEdit = this.onEdit.bind(this);
         this.onSave = this.onSave.bind(this);
     }
-    // componentDidMount(){
-    //     axios.get('http://172.16.1.43:3001/api/getUser',(req,res)=>{
-    //         this.setState({
-    //             name: res.data.user_name,
-    //             profilePicture: res.data.image
-    //         })
-    //     })
-    // }
+    componentDidMount(){
+        console.log("test front",this.props.navigation.state.params.id)
+        axios.get('http://192.168.3.177:3001/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
+            this.setState({
+                name: response.data.response[0].user_name,
+                profilePicture: response.data.response[0].image
+            })
+        })
+    }
 onEdit(){
     console.log("clicked")
     this.setState({
@@ -70,13 +71,13 @@ onSave(){
             }}>
             <View >
                 {this.state.profilePicture ?
-                <Image source={this.state.profilePicture}  style={{ borderWidth:.5, borderColor:'gray',  borderRadius: 60, width: 125, margin: 50, alignItems:'center', height: 125, justifyContent:'center'}}></Image>
+                <Image source={{uri:this.state.profilePicture.toString()}}  style={{ borderWidth:.5, borderColor:'gray',  borderRadius: 60, width: 125, margin: 50, alignItems:'center', height: 125, justifyContent:'center'}}/>
                 :
                 <Icon name="add-user"/>}
                
                 {this.state.canEdit ?
                 <View>
-                <Text >Name</Text>
+                <Text >{this.state.name}</Text>
                 <TextInput></TextInput>
                 <Text>Address</Text>
                 <TextInput></TextInput>
@@ -85,7 +86,7 @@ onSave(){
                 </View>
             :
             <View>
-                <Text >Name</Text>
+                <Text >{this.state.name}</Text>
                 
                 <Text>Address</Text>
                 
