@@ -19,7 +19,8 @@ const  {
     CLIENT_ID, 
     CLIENT_SECRET, 
     CALLBACK_URL,
-    CONNECTION_STRING
+    CONNECTION_STRING,
+    JWT_SECRET
 
 } = process.env;
 
@@ -37,24 +38,13 @@ app.use(session({
     resave: false, 
     saveUninitialized: true
 }))
-
 //connecting server to database using massive
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db);
     console.log("db connected");
-}).catch(console.log)
-
-//Auth login endpoints
-app.post('/api/auth',  (req, res) => {
-    
-    jwt.verify(req.body.token, CLIENT_SECRET, {algorithm: 'HS256'},  (err, decoded) => {
-        console.log('HELP!!!', decoded, CLIENT_SECRET);
-        let db = app.get('db');
-        if (err){
             console.log('Authorization failed', err);
             next(err);
         }
-        let { name, email, sub } = decoded;
         
          db.find_user([sub]).then(async (resp) => {
             
@@ -66,6 +56,7 @@ app.post('/api/auth',  (req, res) => {
                     id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
                             console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
+
                     res.status(200).send(token, id)
                 
             } else {
@@ -89,7 +80,9 @@ app.get('/api/getUser/:id', (req,res)=>{
     db.get_user([req.params.id]).then(response =>{
         res.status(200).send({response})
     })
+
    
 })
+
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
