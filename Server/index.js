@@ -66,12 +66,15 @@ app.post('/api/auth',  (req, res) => {
                     id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
                             console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
+                    req.session.id = id;
+                    
                     res.status(200).send(token, id)
                 
             } else {
                 
                 id = user.id;
-                console.log('are we hitting this?', id)
+                req.session.id = id;
+                console.log('are we hitting this?', req.session, req.session.id)
                 let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
                 res.status(200).send({token, id});
             }
