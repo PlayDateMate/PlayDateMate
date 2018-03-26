@@ -47,13 +47,13 @@ export default class App extends Component {
 //   });
 
   const AppDrawerNavigator = DrawerNavigator({
-    FriendSearch:{screen: FriendSearch},
     Login:{screen: Login},
     Profile:{screen:Profile},
     Events: {screen:Events},
     Friends:{screen: Friends},
     Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
+    FriendSearch:{screen: FriendSearch},
     
     EventSearch: {screen: EventSearch},
 })

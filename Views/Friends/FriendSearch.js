@@ -120,7 +120,7 @@ export default class FriendSearch extends Component{
                     </View>
 
 
-                    <View style={styles.Invitations}><Text>Input</Text></View>
+                    <View style={styles.PlaceHolder}><Text>Input</Text></View>
                     <View style={styles.Results}><Text>Results</Text></View>
                 </Content>
             </Container>
@@ -146,21 +146,13 @@ const styles = StyleSheet.create({
         width: 150,
         marginRight: 20
     },
-    Invitations:{
+    PlaceHolder:{
         flex: .1,
         borderWidth: 1,
         borderColor: 'grey',
         marginTop: 20,
         width: 300,
         alignItems: 'center'
-    },
-    MyEvents:{
-        flex:2,
-        marginTop: 20,
-        width: 300,
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'grey',
     },
     Results:{
         flex:1,
