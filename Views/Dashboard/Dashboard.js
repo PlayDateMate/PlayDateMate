@@ -25,13 +25,21 @@ export default class Dashboard extends Component{
         this.state = {
             user_name: '',
             zip_code: '',
-            children: ''
+            children: '', 
+            userId: ''
+            
         }
     }
 
-  
+  componentDidMount(){
+      console.log('dashboard stuff', this.props.navigation.state.params.id)
+      this.setState({
+          userId:this.props.navigation.state.params.id
+      })
+  }
 
     render(){
+        
         return(
             
             <Container >
@@ -60,13 +68,13 @@ export default class Dashboard extends Component{
             {/* // ***************************** To Do List ******************************** */}
             <View>
                 {this.state.zip_code ? <Text></Text> :
-                <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Profile')}>Your Zip Code needs to be updated!</Text>
+                <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Profile', {id: this.state.userId})}>Your Zip Code needs to be updated!</Text>
 
                 }
             </View>
             <View>
                 {this.state.children ? <Text></Text> :
-                <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Profile')}>Your Children need to be updated!</Text>
+                <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Profile' , {id: this.state.userId})}>Your Children need to be updated!</Text>
 
                 }
             </View>
