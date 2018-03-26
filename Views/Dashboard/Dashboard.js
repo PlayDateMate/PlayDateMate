@@ -31,7 +31,7 @@ export default class Dashboard extends Component{
         }
     }
 
-  componentDidMount(){
+   componentDidMount(){
       console.log('dashboard stuff', this.props.navigation.state.params.id)
       this.setState({
           userId:this.props.navigation.state.params.id
