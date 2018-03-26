@@ -11,6 +11,9 @@ import{
 } from 'react-native';
 
 
+import FriendSearch from './FriendSearch'
+
+
 export default class Friends extends Component{
     render(){
         return(
@@ -33,9 +36,20 @@ export default class Friends extends Component{
                 alignItems: 'center',
                 // justifyContent: 'center'
             }}>
-                <View style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 20}}>Find Friends</Text></View>
-                <View style={styles.Requests}><Text>Requests</Text></View>
-                <View style={styles.Friends}><Text>Friends</Text></View>
+                                            {/* Navigation */}
+
+                <View style = {styles.ButtonBorder}>
+                    <Text style = {{color:'white', fontSize: 20}} onPress={() => this.props.navigation.navigate('FriendSearch')}>Find Friends</Text>
+                </View>
+                                            {/* Navigaition End */}
+
+                <View style={styles.Requests}>
+                    <Text>Requests</Text>
+                </View>
+
+                <View style={styles.Friends}>
+                    <Text>Friends</Text>
+                </View>
             </Content>
             </Container>
         
