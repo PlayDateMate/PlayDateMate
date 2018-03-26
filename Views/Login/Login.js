@@ -38,11 +38,12 @@ export class Login extends Component {
                 audience: 'https://' + credentials.domain + '/userinfo'
             })
             .then(credentials => {
+                console.log('Test')
                 this.setState({ accessToken: credentials.accessToken });
                 this.props.navigation.navigate('Dashboard') 
             })
             .catch(error => {
-                console.log(error)
+                console.log("error check",error)
             });
 
     };
@@ -71,7 +72,7 @@ export class Login extends Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}>
-                        <Button onPress={() => this._onLogin()} title={'Log in'}>
+                        <Button onPress={() => this._onLogin()} title={'Login'}>
                         </Button>
                     </Content>
 
@@ -79,7 +80,7 @@ export class Login extends Component {
                     {/* <Text style={styles.header}>PlayDateMate - Login</Text>
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
-                    </Text> */}
+                    </Text>
                     {/* <Button
                     onPress={ () => loggedIn ? this._onLogout : this._onLogin}
                     title={loggedIn ? 'Log Out' : 'Log In'}
@@ -113,14 +114,15 @@ const LoginScreenStackNavigator = StackNavigator({
     Login: {
         screen: Login
     },
-    Authentication: {
-        screen: Authentication
-    },
+   
     Dashboard: {
         screen: Dashboard,
         navigationOptions: {
             header: null,
         }
+    },
+    Authentication: {
+        screen: Authentication
     }
 },
     {
