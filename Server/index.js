@@ -66,14 +66,14 @@ app.post('/api/auth',  (req, res) => {
                     id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
                             console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                    res.status(200).send(token)
+                    res.status(200).send(token, id)
                 
             } else {
                 
                 id = user.id;
                 console.log('are we hitting this?', id)
                 let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-                res.status(200).send(token);
+                res.status(200).send({token, id});
             }
         })
         
@@ -83,13 +83,13 @@ app.post('/api/auth',  (req, res) => {
 
 //================user endpoints===============
 // app.post('/api/user', user_controller.addUser)
-// app.get('/api/getUser', (req,res)=>{
-//     let db = app.get('db');
-//     console.log('id check',decoded)
-//     db.find_user([user.id]).then(response =>{
-//         res.status(200).send({response})
-//     })
+app.get('/api/getUser/:id', (req,res)=>{
+    let db = app.get('db');
+    console.log('id check', req.params.id)
+    db.get_user([req.params.id]).then(response =>{
+        res.status(200).send({response})
+    })
    
-// })
+})
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
