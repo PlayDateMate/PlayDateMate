@@ -19,7 +19,8 @@ const  {
     CLIENT_ID, 
     CLIENT_SECRET, 
     CALLBACK_URL,
-    CONNECTION_STRING
+    CONNECTION_STRING,
+    
 
 } = process.env;
 
@@ -48,7 +49,6 @@ massive(CONNECTION_STRING).then(db => {
 app.post('/api/auth',  (req, res) => {
     
     jwt.verify(req.body.token, CLIENT_SECRET, {algorithm: 'HS256'},  (err, decoded) => {
-        console.log('HELP!!!', decoded, CLIENT_SECRET);
         let db = app.get('db');
         if (err){
             console.log('Authorization failed', err);
@@ -57,21 +57,19 @@ app.post('/api/auth',  (req, res) => {
         let { name, email, sub } = decoded;
         
          db.find_user([sub]).then(async (resp) => {
-            
+            console.log("hur dur dur")
             let user = resp[0];
             let id = '';
             if  (!user) {
-                 
-                    console.log("are we getting here?", decoded)
+                  console.log('did we get here?')
                     id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
-                            console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
                     req.session.id = id;
                     
                     res.status(200).send(token, id)
                 
             } else {
-                
+                console.log("how about here?")
                 id = user.id;
                 req.session.id = id;
                 console.log('are we hitting this?', req.session, req.session.id)

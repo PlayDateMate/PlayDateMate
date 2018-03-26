@@ -43,11 +43,13 @@ export class Login extends Component {
                 
                 this.setState({ accessToken: credentials.accessToken });
                 console.log(credentials);
+
                  await axios.post('http://192.168.0.172:3001/api/auth', {token: credentials.idToken}).then(  (response)=> {
                     console.log("where is this",response.data.id)
                       this.setState({
                         userId:response.data.id
                     })
+
                 }) 
                 console.log("state", this.state.userId)
                 this.props.navigation.navigate('Dashboard', {id:this.state.userId})
@@ -87,7 +89,7 @@ export class Login extends Component {
                     </Content>
 
                     {/* code below new stuff on auth0 */}
-                    <Text style={styles.header}>PlayDateMate - Login</Text>
+                    {/* <Text style={styles.header}>PlayDateMate - Login</Text>
                     <Text>
                         You are {loggedIn ? '' : 'not '}logged in.
                     </Text>
