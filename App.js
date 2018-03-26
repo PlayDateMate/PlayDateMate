@@ -8,7 +8,7 @@ import Profile from './Views/Profile/Profile';
 import Chat from './Views/Chat/Chat'
 import FriendSearch from './Views/Friends/FriendSearch'
 import EventSearch from './Views/Events/EventSearch'
-import CustomMarker from './Views/SlidersJavascript/customMarker'
+
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
   Platform,
