@@ -20,7 +20,7 @@ const  {
     CLIENT_SECRET, 
     CALLBACK_URL,
     CONNECTION_STRING,
-    JWT_SECRET
+    
 
 } = process.env;
 
@@ -38,31 +38,41 @@ app.use(session({
     resave: false, 
     saveUninitialized: true
 }))
+
 //connecting server to database using massive
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db);
     console.log("db connected");
+}).catch(console.log)
+
+//Auth login endpoints
+app.post('/api/auth',  (req, res) => {
+    
+    jwt.verify(req.body.token, CLIENT_SECRET, {algorithm: 'HS256'},  (err, decoded) => {
+        let db = app.get('db');
+        if (err){
             console.log('Authorization failed', err);
             next(err);
         }
+        let { name, email, sub } = decoded;
         
          db.find_user([sub]).then(async (resp) => {
-            
+            console.log("hur dur dur")
             let user = resp[0];
             let id = '';
             if  (!user) {
-                 
-                    console.log("are we getting here?", decoded)
+                  console.log('did we get here?')
                     id = await db.create_user([decoded.name, decoded.picture, decoded.sub ])
-                            console.log("check again", id)
                     let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
-
+                    req.session.id = id;
+                    
                     res.status(200).send(token, id)
                 
             } else {
-                
+                console.log("how about here?")
                 id = user.id;
-                console.log('are we hitting this?', id)
+                req.session.id = id;
+                console.log('are we hitting this?', req.session, req.session.id)
                 let token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d'})
                 res.status(200).send({token, id});
             }
@@ -80,9 +90,7 @@ app.get('/api/getUser/:id', (req,res)=>{
     db.get_user([req.params.id]).then(response =>{
         res.status(200).send({response})
     })
-
    
 })
-
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
