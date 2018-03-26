@@ -42,7 +42,7 @@ export class Login extends Component {
                 console.log('Test')
                 this.setState({ accessToken: credentials.accessToken });
                 console.log(credentials);
-                axios.post('http://172.16.1.43:3001/api/auth', {token: credentials.idToken}).then( (response)=> {
+                axios.post('http://192.168.3.177:3001/api/auth', {token: credentials.idToken}).then( (response)=> {
                     console.log(response.data)
                 }) 
                 this.props.navigation.navigate('Dashboard')
