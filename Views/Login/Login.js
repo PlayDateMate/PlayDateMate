@@ -7,6 +7,7 @@ import Events from '../Events/Events'
 import Authentication from '../../Server/Authentication'
 import { Icon, Container, Header, Content, Left } from 'native-base';
 import Auth0 from 'react-native-auth0';//from auth0
+import axios from 'axios';
 
 var credentials = require('./../../Server/auth0-credentials');
 
@@ -27,7 +28,8 @@ export class Login extends Component {
     }
     constructor(props) {
         super(props);
-        this.state = {accessToken: null}
+        this.state = {accessToken: null,
+        userId: ''}
     }
 
     //code below is auth0 stuff
@@ -35,12 +37,22 @@ export class Login extends Component {
         auth0.webAuth
             .authorize({
                 scope: 'openid profile',
-                audience: 'https://' + credentials.domain + '/userinfo'
+                // audience: 'https://' + credentials.domain + '/userinfo'
             })
-            .then(credentials => {
-                console.log('Test')
+            .then( async credentials => {
+                
                 this.setState({ accessToken: credentials.accessToken });
-                this.props.navigation.navigate('Dashboard') 
+                console.log(credentials);
+
+                 await axios.post('http://192.168.0.172:3001/api/auth', {token: credentials.idToken}).then(  (response)=> {
+                    console.log("where is this",response.data.id)
+                      this.setState({
+                        userId:response.data.id
+                    })
+
+                }) 
+                console.log("state", this.state.userId)
+                this.props.navigation.navigate('Dashboard', {id:this.state.userId})
             })
             .catch(error => {
                 console.log("error check",error)
