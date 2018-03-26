@@ -1,2 +1,2 @@
--- select * from users
--- where auth_id = $1;
+select * from users
+where auth_id = $1;

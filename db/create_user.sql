@@ -1,1 +1,1 @@
--- INSERT INTO users
+INSERT INTO users

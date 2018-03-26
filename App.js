@@ -54,6 +54,5 @@ export default class App extends Component {
     Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
     FriendSearch:{screen: FriendSearch},
-    
     EventSearch: {screen: EventSearch},
 })
