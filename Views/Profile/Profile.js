@@ -29,7 +29,7 @@ export default class Profile extends Component{
     }
     componentDidMount(){
         console.log("test front",this.props.navigation.state.params.id)
-        axios.get('http://192.168.0.172:3001/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
+        axios.get('http://216.21.163.235/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
             
             this.setState({
                 name: response.data.response[0].user_name,
