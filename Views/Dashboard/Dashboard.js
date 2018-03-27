@@ -9,7 +9,7 @@ import Events from '../Events/Events'
 import Profile from '../Profile/Profile'
 import Chat from '../Chat/Chat'
 import CreateEvent from '../Events/CreateEvent'
-import EventSearch from '../Events/EventSearch'
+import SearchEvents from '../Events/EventSearch'
 import FriendSearch from '../Friends/FriendSearch'
 
 import{
@@ -58,7 +58,7 @@ export default class Dashboard extends Component{
                 <Header style={styles.dashboardheader}>
                 
                     <Left  >
-                    <Icon name = "home" onPress = {()=>{
+                    <Icon name = "ios-person" onPress = {()=>{
                     this.props.navigation.navigate('Profile', {id:this.state.userId})
                 }}/>
                     </Left>

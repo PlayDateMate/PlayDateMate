@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
-import {Icon, Container, Header, Content, Left, Right, Body, Title} from 'native-base'
-
-
+import {Icon, Container, Header, Content, Left, Right, Body, Title} from 'native-base';
 import{
     StyleSheet, 
     Text,
@@ -34,7 +32,7 @@ componentDidMount(){
             <Container >
                 <Header>
                     <Left >
-                    <Icon name = "ios-menu" onPress = {()=>{
+                    <Icon name = "home" onPress = {()=>{
                     this.props.navigation.navigate('Dashboard', {id: this.state.userId})
                 }}/>
                     </Left>

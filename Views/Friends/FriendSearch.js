@@ -53,8 +53,8 @@ export default class FriendSearch extends Component{
             <Container>
                 <Header>
                     <Left>
-                        <Icon name = "ios-menu" onPress = {() => {
-                            this.props.navigation.navigate('DrawerOpen', {id: this.state.userId})
+                        <Icon name = "ios-arrow-back" onPress = {() => {
+                            this.props.navigation.navigate('Friends', {id: this.state.userId})
                             }}/>
                     </Left>
 

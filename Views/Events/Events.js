@@ -10,6 +10,8 @@ import{
 } from 'react-native';
 
 
+
+
 export default class Events extends Component{
     constructor(){
         super();
@@ -17,13 +19,20 @@ export default class Events extends Component{
             userId: ''
         }
     }
+
+    componentDidMount(){
+        console.log('id in to events', this.props.navigation.state.params.id)
+        this.setState({
+            userId : this.props.navigation.state.params.id
+        })
+    }
     render(){
         return(
             <Container >
             <Header>
                 <Left >
-                <Icon name = "ios-menu" onPress = {()=>{
-                this.props.navigation.navigate('DrawerOpen')
+                <Icon name = "home" onPress = {()=>{
+                this.props.navigation.navigate('Dashboard', {id: this.state.userId})
             }}/>
                 </Left>
                 <Body>
@@ -40,7 +49,7 @@ export default class Events extends Component{
         }}>
         <View style = {styles.ButtonContainer}>
             <View style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Create Events</Text></View>
-            <View onPress = {this.props.navigation.navigate('EventSearch')} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
+            <View onPress = {this.props.navigation.navigate('SearchEvents', {id: this.state.userId})} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
         </View>
                 <View style={styles.Invitations}><Text>Invitations</Text></View>
                 <View style={styles.MyEvents}><Text>My Events</Text></View>

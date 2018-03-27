@@ -27,7 +27,12 @@ export default class EventsSearch extends Component{
           userId: '',
         };
       }
-    
+      componentDidMount(){
+        console.log('id in to Event search', this.props.navigation.state.params.id)
+        this.setState({
+            userId : this.props.navigation.state.params.id
+        })
+    }
     
     
       // SLIDER
@@ -51,8 +56,8 @@ export default class EventsSearch extends Component{
             <Container>
                 <Header>
                     <Left>
-                        <Icon name = "ios-menu" onPress = {() => {
-                            this.props.navigation.navigate('DrawerOpen')
+                        <Icon name = "ios-arrow-back" onPress = {() => {
+                            this.props.navigation.navigate('Events', {id:this.state.userId})
                             }}/>
                     </Left>
 

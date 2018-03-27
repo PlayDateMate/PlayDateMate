@@ -55,7 +55,7 @@ onSave(){
             <Container >
                 <Header>
                     <Left >
-                    <Icon name = "ios-menu" onPress = {()=>{
+                    <Icon name = "home" onPress = {()=>{
                     this.props.navigation.navigate('Dashboard', {id: this.state.userId})
                 }}/>
                     </Left>
