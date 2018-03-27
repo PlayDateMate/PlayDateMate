@@ -48,8 +48,13 @@ export default class Events extends Component{
             justifyContent: 'center'
         }}>
         <View style = {styles.ButtonContainer}>
+<<<<<<< HEAD
             <View style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Create Events</Text></View>
             <View onPress = {this.props.navigation.navigate('SearchEvents', {id: this.state.userId})} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
+=======
+            <View onPress = {this.props.navigation.navigate('CreateEvent')} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Create Events</Text></View>
+            <View onPress = {this.props.navigation.navigate('EventSearch')} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
+>>>>>>> master
         </View>
                 <View style={styles.Invitations}><Text>Invitations</Text></View>
                 <View style={styles.MyEvents}><Text>My Events</Text></View>

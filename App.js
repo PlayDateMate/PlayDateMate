@@ -8,6 +8,10 @@ import Profile from './Views/Profile/Profile';
 import Chat from './Views/Chat/Chat'
 import FriendSearch from './Views/Friends/FriendSearch'
 import SearchEvents from './Views/Events/EventSearch'
+<<<<<<< HEAD
+=======
+import EventCreate from './Views/Events/CreateEvent';
+>>>>>>> master
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
@@ -55,5 +59,10 @@ export default class App extends Component {
     Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
     FriendSearch:{screen: FriendSearch},
+<<<<<<< HEAD
+=======
+    
+    EventCreate: {screen: EventCreate},
+>>>>>>> master
     SearchEvents: {screen: SearchEvents},
 })
