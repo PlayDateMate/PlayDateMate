@@ -10,6 +10,7 @@ export default class Chat extends Component{
 
         this.state = {
             messages: [],
+            userId: ''
           }
     }
 
