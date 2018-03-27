@@ -7,7 +7,7 @@ import Login from './Views/Login/Login';
 import Profile from './Views/Profile/Profile';
 import Chat from './Views/Chat/Chat'
 import FriendSearch from './Views/Friends/FriendSearch'
-import EventSearch from './Views/Events/EventSearch'
+import SearchEvents from './Views/Events/EventSearch.js'
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
@@ -48,11 +48,12 @@ export default class App extends Component {
 
   const AppDrawerNavigator = DrawerNavigator({
     Login:{screen: Login},
+    Dashboard:{screen:Dashboard},
     Profile:{screen:Profile},
     Events: {screen:Events},
     Friends:{screen: Friends},
-    Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
-    FriendSearch:{screen: FriendSearch},
-    EventSearch: {screen: EventSearch},
+    SearchEvents:{screen:SearchEvents},
+    FriendSearch:{screen: FriendSearch}
+    
 })
