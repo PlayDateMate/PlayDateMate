@@ -32,7 +32,7 @@ export default class CreateEvents extends Component{
             event: [],
 
             events: {
-                id: 1,
+                id: '',
                 event_name: '',
                 event_description: '',
                 start_date: '',
@@ -60,7 +60,9 @@ export default class CreateEvents extends Component{
     }
 
     onPressButton() {
+        console.log("Hit!")
         axios.post('http://192.168.3.177:3001/api/events', {
+            id: this.props.id,
             event_name: this.state.nameInpu, 
             event_description: this.state.descriptionInput, 
             start_date: this.state.startdateInput, 
@@ -73,7 +75,7 @@ export default class CreateEvents extends Component{
             privacy: this.state.privacyInput
         })
         .then((response) => {
-            console.log(response.data);
+            console.log("Test", response.data);
             this.setState({event: response.data[0]})
             // this.props.history.push('/Dashboard')
         }).catch(console.log)
@@ -213,7 +215,7 @@ export default class CreateEvents extends Component{
                 />
                 
                 <View style={styles.ButtonContainer}>
-                    <TouchableHighlight style={styles.ButtonBorder} onPress={this.onPressButton}>
+                    <TouchableHighlight style={styles.ButtonBorder} onPress={() => this.onPressButton()}>
                         <Text style={styles.buttonText}>
                             Create Event
                         </Text>
