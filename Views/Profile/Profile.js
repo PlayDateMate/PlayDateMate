@@ -29,8 +29,7 @@ export default class Profile extends Component{
     }
     async componentWillMount(){
         console.log("test front",this.props.navigation.state.params.id)
-        await axios.get('https://192.168.3.142/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
-            
+        axios.get('http://192.168.3.177:3001/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
             this.setState({
                 name: response.data.response[0].user_name,
                 profilePicture: response.data.response[0].image
