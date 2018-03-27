@@ -20,8 +20,6 @@ const  {
     CLIENT_SECRET, 
     CALLBACK_URL,
     CONNECTION_STRING,
-    
-
 } = process.env;
 
 

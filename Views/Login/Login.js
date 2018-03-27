@@ -28,8 +28,10 @@ export class Login extends Component {
     }
     constructor(props) {
         super(props);
-        this.state = {accessToken: null,
-        userId: ''}
+        this.state = {
+            accessToken: null,
+            userId: ''
+        }
     }
 
     //code below is auth0 stuff

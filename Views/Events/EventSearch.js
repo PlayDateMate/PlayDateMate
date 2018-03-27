@@ -11,13 +11,8 @@ import{
 } from 'react-native';
 
 
-
-
-
 export default class EventsSearch extends Component{
-    
-    
-    
+     
     constructor(props) {
         super(props);
         this.state = {

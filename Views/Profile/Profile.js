@@ -15,8 +15,8 @@ import{
 
 
 export default class Profile extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             name: '',
             zip: '',
@@ -30,7 +30,6 @@ export default class Profile extends Component{
     componentDidMount(){
         console.log("test front",this.props.navigation.state.params.id)
         axios.get('http://192.168.3.135:3001/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
-            
             this.setState({
                 name: response.data.response[0].user_name,
                 profilePicture: response.data.response[0].image
