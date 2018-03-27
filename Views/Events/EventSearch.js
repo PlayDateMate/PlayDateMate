@@ -23,7 +23,8 @@ export default class EventsSearch extends Component{
         this.state = {
           value: 20,
           age: 7,
-          distance: 50
+          distance: 50, 
+          userId: '',
         };
       }
     

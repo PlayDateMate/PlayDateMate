@@ -21,6 +21,7 @@ import {
 export default class App extends Component {
 
   render() {
+    console.log("does anything happen here?")
     return (
       
       <AppDrawerNavigator/>

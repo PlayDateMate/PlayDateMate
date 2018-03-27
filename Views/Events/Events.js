@@ -11,6 +11,12 @@ import{
 
 
 export default class Events extends Component{
+    constructor(){
+        super();
+        this.state = {
+            userId: ''
+        }
+    }
     render(){
         return(
             <Container >

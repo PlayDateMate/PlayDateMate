@@ -15,18 +15,21 @@ import{
 
 
 export default class FriendSearch extends Component{
-    
-    
-    
     constructor(props) {
         super(props);
         this.state = {
           value: 20,
           age: 7,
-          distance: 50
+          distance: 50, 
+          userId: ''
         };
       }
-    
+    componentDidMount(){
+        console.log('id in to friend search', this.props.navigation.state.params.id)
+        this.setState({
+            userId : this.props.navigation.state.params.id
+        })
+    }
     
     
       // SLIDER
@@ -51,7 +54,7 @@ export default class FriendSearch extends Component{
                 <Header>
                     <Left>
                         <Icon name = "ios-menu" onPress = {() => {
-                            this.props.navigation.navigate('DrawerOpen')
+                            this.props.navigation.navigate('DrawerOpen', {id: this.state.userId})
                             }}/>
                     </Left>
 

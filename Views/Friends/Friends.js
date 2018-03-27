@@ -15,13 +15,27 @@ import FriendSearch from './FriendSearch'
 
 
 export default class Friends extends Component{
+    constructor(){
+        super();
+        this.state = {
+            userId: ''
+        }
+    }
+
+componentDidMount(){
+    console.log('id in to friends', this.props)
+    this.setState({
+        userId : this.props.navigation.state.params.id
+    })
+}
     render(){
+        
         return(
             <Container >
                 <Header>
                     <Left >
                     <Icon name = "ios-menu" onPress = {()=>{
-                    this.props.navigation.navigate('DrawerOpen')
+                    this.props.navigation.navigate('Dashboard', {id: this.state.userId})
                 }}/>
                     </Left>
                     <Body>
@@ -39,7 +53,7 @@ export default class Friends extends Component{
                                             {/* Navigation */}
 
                 <View style = {styles.ButtonBorder}>
-                    <Text style = {{color:'white', fontSize: 20}} onPress={() => this.props.navigation.navigate('FriendSearch')}>Find Friends</Text>
+                    <Text style = {{color:'white', fontSize: 20}} onPress={() => this.props.navigation.navigate('FriendSearch', {id: this.state.userId})}>Find Friends</Text>
                 </View>
                                             {/* Navigaition End */}
 

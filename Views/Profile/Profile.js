@@ -22,7 +22,8 @@ export default class Profile extends Component{
             zip: '',
             email: '',
             profilePicture: require('../../images/login2.jpg'),
-            canEdit: false
+            canEdit: false, 
+            userId:'',
         }
         this.onEdit = this.onEdit.bind(this);
         this.onSave = this.onSave.bind(this);
@@ -55,7 +56,7 @@ onSave(){
                 <Header>
                     <Left >
                     <Icon name = "ios-menu" onPress = {()=>{
-                    this.props.navigation.navigate('DrawerOpen')
+                    this.props.navigation.navigate('Dashboard', {id: this.state.userId})
                 }}/>
                     </Left>
                     <Body>
