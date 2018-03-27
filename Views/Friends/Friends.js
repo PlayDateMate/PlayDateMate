@@ -15,13 +15,17 @@ import FriendSearch from './FriendSearch'
 
 
 export default class Friends extends Component{
+    constructor(props){
+        super(props);
+    }
     render(){
+        
         return(
             <Container >
                 <Header>
                     <Left >
-                    <Icon name = "ios-menu" onPress = {()=>{
-                    this.props.navigation.navigate('DrawerOpen')
+                    <Icon name = "ios-arrow-back" onPress = {()=>{
+                    this.props.navigation.navigate('Dashboard')
                 }}/>
                     </Left>
                     <Body>

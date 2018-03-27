@@ -20,8 +20,8 @@ import{
 
 export default class Dashboard extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             user_name: '',
             zip_code: '',
@@ -39,7 +39,7 @@ export default class Dashboard extends Component{
   }
 
     render(){
-        
+        <Profile id = {this.state.userId}/>
         return(
             
             <Container >
@@ -47,8 +47,8 @@ export default class Dashboard extends Component{
                 <Header style={styles.dashboardheader}>
                 
                     <Left  >
-                    <Icon name = "ios person" onPress = {()=>{
-                    this.props.navigation.navigate('Profile')
+                    <Icon name = "ios-menu" onPress = {()=>{
+                    this.props.navigation.navigate('DrawerOpen')
                 }}/>
                     </Left>
                     <Body>
