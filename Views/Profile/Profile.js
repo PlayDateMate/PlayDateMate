@@ -27,7 +27,7 @@ export default class Profile extends Component{
         this.onEdit = this.onEdit.bind(this);
         this.onSave = this.onSave.bind(this);
     }
-    async componentDidMount(){
+    async componentWillMount(){
         console.log("test front",this.props.navigation.state.params.id)
         await axios.get('https://192.168.3.142/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
             
@@ -56,7 +56,7 @@ onSave(){
             <Container >
                 <Header>
                     <Left >
-                    <Icon name = "ios-menu" onPress = {()=>{
+                    <Icon name = "home" onPress = {()=>{
                     this.props.navigation.navigate('DrawerOpen')
                 }}/>
                     </Left>

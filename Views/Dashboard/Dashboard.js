@@ -47,8 +47,8 @@ export default class Dashboard extends Component{
                 <Header style={styles.dashboardheader}>
                 
                     <Left  >
-                    <Icon name = "ios-menu" onPress = {()=>{
-                    this.props.navigation.navigate('DrawerOpen')
+                    <Icon name = "ios person" onPress = {()=>{
+                    this.props.navigation.navigate('Profile')
                 }}/>
                     </Left>
                     <Body>
