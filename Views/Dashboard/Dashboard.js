@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Icon, Container, Header, Content, Left, Body, Right, Title} from 'native-base';
 import {Button} from 'react-native';
 import {StackRouter, DrawerNavigator} from 'react-navigation'
+import axios from 'axios';
 
 import Friends from '../Friends/Friends'
 import Events from '../Events/Events'
@@ -24,13 +25,15 @@ import{
 
 export default class Dashboard extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             user_name: '',
             zip_code: '',
             children: '', 
-            userId: ''
+            userId: '',
+            latitude: null,
+            longitude: null
             
         }
     }
@@ -46,10 +49,32 @@ export default class Dashboard extends Component{
             userId: 5
         })
     }
+        navigator.geolocation.getCurrentPosition((position)=>{
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude:position.coords.longitude
+        })
+      })
+    
+}
+componentWillUnmount(){
+    
+        let location = {
+            userId: this.state.userId,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude
+        }
+        
+        axios.put(process.env.IP_ADDRESS +'/api/locations', location).then(
+        console.log('Success!!!!')
+    )
+
 }
 
+
+
     render(){
-                
+        console.log("this is the latitude and longitude", this.state.latitude, this.state.longitude)
         return(
             
             
