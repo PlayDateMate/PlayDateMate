@@ -40,7 +40,7 @@ export class Login extends Component {
                 this.setState({ accessToken: credentials.accessToken });
                 console.log(credentials);
 
-                 await axios.post('https://192.168.3.177:3001/api/auth', {token: credentials.idToken}).then(  (response)=> {
+                 await axios.post('https://192.168.3.142:3001/api/auth', {token: credentials.idToken}).then(  (response)=> {
                     console.log("where is this",response.data.id)
                       this.setState({
                         userId:response.data.id
