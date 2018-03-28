@@ -95,6 +95,7 @@ app.get('/api/getUser/:id', (req,res)=>{
 
 //=========event endpoints=========
 app.post('/api/events', controller.createEvent)
+app.get('/api/user/:user_id/events', controller.getEvents)
 app.delete('/api/events/:id', controller.cancelEvent)
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))

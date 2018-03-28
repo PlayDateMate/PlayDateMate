@@ -3,14 +3,18 @@ import {StackNavigator} from 'react-navigation';
 import axios from 'axios';
 
 
-import{
+import {
     StyleSheet, 
     Text,
     View,
     Button,
     TextInput,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableOpacity,
+    DateTimePicker,
+    DatePickerIOS
 } from 'react-native';
+
 import { Container, Row } from 'native-base';
 
 
@@ -31,7 +35,7 @@ export default class CreateEvents extends Component{
             privacyInput: '',
             event: [],
 
-            events: {
+            event: {
                 id: '',
                 event_name: '',
                 event_description: '',
@@ -43,14 +47,14 @@ export default class CreateEvents extends Component{
                 city: '',
                 zipcode: '',
                 privacy: '',
-                userId: 1
+                user_id: 1
             }
+            
         }
     this.nameInput =  this.nameInput.bind(this);
     this.descriptionInput =  this.descriptionInput.bind(this);
-    this.startdateInput =  this.startdateInput.bind(this);
-    this.enddateInput =  this.enddateInput.bind(this);
-    this.minageInput =  this.minageInput.bind(this);
+    this.startdateInput = this.startdateInput.bind(this);
+    this.enddateInput = this.enddateInput.bind(this);
     this.maxageInput =  this.maxageInput.bind(this);
     this.addressInput =  this.addressInput.bind(this);
     this.cityInput =  this.cityInput.bind(this);
@@ -63,16 +67,16 @@ export default class CreateEvents extends Component{
         console.log("Hit!")
         axios.post('http://192.168.3.177:3001/api/events', {
             id: this.props.id,
-            event_name: this.state.nameInpu, 
-            event_description: this.state.descriptionInput, 
-            start_date: this.state.startdateInput, 
-            end_date: this.state.enddateInput, 
-            age_min: this.state.minageInput, 
-            age_max: this.state.maxageInput, 
-            address: this.state.addressInput, 
-            city: this.state.cityInput, 
-            zipcode: this.state.zipcodeInput, 
-            privacy: this.state.privacyInput
+            event_name: this.state.event_name, 
+            event_description: this.state.event_description, 
+            start_date: this.state.start_date, 
+            end_date: this.state.end_date, 
+            age_min: this.state.age_min, 
+            age_max: this.state.age_max, 
+            address: this.state.address, 
+            city: this.state.city, 
+            zipcode: this.state.zipcode, 
+            privacy: this.state.privacy
         })
         .then((response) => {
             console.log("Test", response.data);
@@ -81,24 +85,28 @@ export default class CreateEvents extends Component{
         }).catch(console.log)
     }
 
-    componentDidMount() {
-        axios.get('/api/events/:id').then( response => {
-          let event = response.data
-          this.setState({
-              id: event.id, 
-               event_name: event.event_name, 
-               event_description: event.event_description, 
-               start_date: event.start_date, 
-               end_date: event.end_date, 
-               age_min: event.age_min, 
-               age_max: event.age_max, 
-               address: event.address, 
-               city: event.city, 
-               zipcode: event.zipcode, 
-               privacy: event.privacy 
-               })
-        }).catch(console.log)
-      }
+    handleSubmit(event) {
+
+    }
+
+    // componentDidMount() {
+    //     axios.get('/api/events/:id').then( response => {
+    //       let event = response.data
+    //       this.setState({
+    //           id: event.id, 
+    //            event_name: event.event_name, 
+    //            event_description: event.event_description, 
+    //            start_date: event.start_date, 
+    //            end_date: event.end_date, 
+    //            age_min: event.age_min, 
+    //            age_max: event.age_max, 
+    //            address: event.address, 
+    //            city: event.city, 
+    //            zipcode: event.zipcode, 
+    //            privacy: event.privacy 
+    //            })
+    //     }).catch(console.log)
+    //   }
 
         cancelEvent(){
         // console.log(this.props.match.params.id);
@@ -131,6 +139,7 @@ export default class CreateEvents extends Component{
             end_date: val
         })
     }
+
     minageInput(val) {
         console.log(val);
         this.setState({
@@ -168,8 +177,6 @@ export default class CreateEvents extends Component{
         })
     }
 
-
-
     render(){
         let events = this.state.event;
         return(
@@ -177,7 +184,8 @@ export default class CreateEvents extends Component{
                
                 <TextInput
                 onChangeText={(val) => this.nameInput(val)}
-                style={styles.input} placeholder="Event Name" 
+                style={styles.input} placeholder="Event Name"
+                
                 />
                 <TextInput
                     onChangeText={(val) => this.descriptionInput(val)}
@@ -185,14 +193,13 @@ export default class CreateEvents extends Component{
                 />
                 <TextInput
                     onChangeText={(val) => this.startdateInput(val)}
-                    style={styles.input} placeholder="Start Date"
-                    type = "date" 
+                    style={styles.input} placeholder="Start Date" 
                 />
                 <TextInput
                     onChangeText={(val) => this.enddateInput(val)}
-                    style={styles.input} placeholder="End Date"
-                    type = "date" 
+                    style={styles.input} placeholder="End Date" 
                 />
+                
                 <TextInput
                     onChangeText={(val) => this.maxageInput(val)}
                     style={styles.input} placeholder="Maximum age" 

@@ -9,14 +9,12 @@ import{
     View
 } from 'react-native';
 
-
-
-
 export default class Events extends Component{
     constructor(){
         super();
         this.state = {
-            userId: ''
+            userId: '',
+            userEvents: []
         }
     }
 
@@ -26,13 +24,26 @@ export default class Events extends Component{
             userId : this.props.navigation.state.params.id
         })
     }
-    render(){
+
+    getEvents(user_id){
+        axios.get(`http://192.168.1.241:3001/api/user/${user_id}/events`).then((res) => {
+            console.log(res.data)
+            this.setState({ userEvents: res.data })
+        }).catch((err) => console.log("err", err));
+    }
+
+    render() {
+
+        const events = this.state.userEvents.map((event, i) => {
+            return <Link key={i} to={`/events/${event.id}`} className="pat-tile"><h1>{event.event_name} ></h1></Link>
+        })
+
         return(
             <Container >
             <Header>
                 <Left >
                 <Icon name = "home" onPress = {()=>{
-                this.props.navigation.navigate('Dashboard', {id: this.state.userId})
+                this.props.navigation.navigate('DrawerOpen', {id: this.state.userId})
             }}/>
                 </Left>
                 <Body>
@@ -52,7 +63,9 @@ export default class Events extends Component{
             <View onPress= {() => this.props.navigation.navigate('EventSearch',{id:this.state.userId})} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
         </View>
                 <View style={styles.Invitations}><Text>Invitations</Text></View>
-                <View style={styles.MyEvents}><Text>My Events</Text></View>
+                <View style={styles.MyEvents}><Text>My Events</Text>
+                    {events}
+                </View>
                 <View style={styles.UpcomingEvents}><Text>Upcoming Events</Text></View>
         </Content>
         </Container>
