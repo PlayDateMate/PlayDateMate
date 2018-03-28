@@ -30,8 +30,6 @@ export default class CreateEvents extends Component{
             zipcodeInput: '',
             privacyInput: '',
             event: [],
-
-            events: {
                 id: 1,
                 event_name: '',
                 event_description: '',
@@ -44,7 +42,7 @@ export default class CreateEvents extends Component{
                 zipcode: '',
                 privacy: '',
                 userId: 1
-            }
+            
         }
     this.nameInput =  this.nameInput.bind(this);
     this.descriptionInput =  this.descriptionInput.bind(this);
@@ -59,44 +57,43 @@ export default class CreateEvents extends Component{
     this.onPressButton = this.onPressButton.bind(this);
     }
 
+    
+    // componentDidMount() {
+    //     axios.get('/api/events/:id').then( response => {
+    //         let event = response.data
+    //         this.setState({
+    //             id: event.id, 
+    //             event_name: event.event_name, 
+    //             event_description: event.event_description, 
+    //             start_date: event.start_date, 
+    //             end_date: event.end_date, 
+    //             age_min: event.age_min, 
+    //             age_max: event.age_max, 
+    //             address: event.address, 
+    //             city: event.city, 
+    //             zipcode: event.zipcode, 
+    //             privacy: event.privacy 
+    //         })
+    //     }).catch(console.log)
+    // }
     onPressButton() {
-        axios.post('http://192.168.3.177:3001/api/events', {
-            event_name: this.state.nameInpu, 
-            event_description: this.state.descriptionInput, 
-            start_date: this.state.startdateInput, 
-            end_date: this.state.enddateInput, 
-            age_min: this.state.minageInput, 
-            age_max: this.state.maxageInput, 
-            address: this.state.addressInput, 
-            city: this.state.cityInput, 
-            zipcode: this.state.zipcodeInput, 
-            privacy: this.state.privacyInput
-        })
-        .then((response) => {
-            console.log(response.data);
-            this.setState({event: response.data[0]})
-            // this.props.history.push('/Dashboard')
-        }).catch(console.log)
-    }
-
-    componentDidMount() {
-        axios.get('/api/events/:id').then( response => {
-          let event = response.data
-          this.setState({
-              id: event.id, 
-               event_name: event.event_name, 
-               event_description: event.event_description, 
-               start_date: event.start_date, 
-               end_date: event.end_date, 
-               age_min: event.age_min, 
-               age_max: event.age_max, 
-               address: event.address, 
-               city: event.city, 
-               zipcode: event.zipcode, 
-               privacy: event.privacy 
-               })
-        }).catch(console.log)
-      }
+        console.log("this is the set state", this.state.event_name),
+        axios.post('http://192.168.3.135:3001/api/events', {
+           event_name: this.state.event_name, 
+            event_description: this.state.event_description, 
+            start_date: this.state.start_date, 
+            end_date: this.state.end_date, 
+            age_min: this.state.age_min, 
+            age_max: this.state.age_max, 
+            address: this.state.address, 
+            city: this.state.city, 
+            zipcode: this.state.zipcode, 
+            privacy: this.state.privacy
+            }).then((res) => {
+            console.log(res.data);
+                return res.data
+            })
+        }
 
         cancelEvent(){
         // console.log(this.props.match.params.id);
@@ -110,6 +107,7 @@ export default class CreateEvents extends Component{
         this.setState({
             event_name: val
         })
+        console.log("StateName:", this.state.event_name)
     }
     descriptionInput(val) {
         console.log(val);
@@ -117,6 +115,7 @@ export default class CreateEvents extends Component{
             event_description: val
         })
     }
+
     startdateInput(val) {
         console.log(val);
         this.setState({
@@ -176,6 +175,7 @@ export default class CreateEvents extends Component{
                 <TextInput
                 onChangeText={(val) => this.nameInput(val)}
                 style={styles.input} placeholder="Event Name" 
+                /* type = 'text' */
                 />
                 <TextInput
                     onChangeText={(val) => this.descriptionInput(val)}
@@ -184,7 +184,7 @@ export default class CreateEvents extends Component{
                 <TextInput
                     onChangeText={(val) => this.startdateInput(val)}
                     style={styles.input} placeholder="Start Date"
-                    type = "date" 
+                    /* type = "date"  */
                 />
                 <TextInput
                     onChangeText={(val) => this.enddateInput(val)}
@@ -213,7 +213,7 @@ export default class CreateEvents extends Component{
                 />
                 
                 <View style={styles.ButtonContainer}>
-                    <TouchableHighlight style={styles.ButtonBorder} onPress={this.onPressButton}>
+                    <TouchableHighlight style={styles.ButtonBorder} onPress={() => this.onPressButton()}>
                         <Text style={styles.buttonText}>
                             Create Event
                         </Text>
