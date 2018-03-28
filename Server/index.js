@@ -10,6 +10,8 @@ const axios = require('axios');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 // const user_controller = require('./user_controller');
+const controller = require('./controller')
+
 
 const  {
     SERVER_PORT,
@@ -90,5 +92,9 @@ app.get('/api/getUser/:id', (req,res)=>{
     })
    
 })
+
+//=========event endpoints=========
+app.post('/api/events', controller.createEvent)
+app.delete('/api/events/:id', controller.cancelEvent)
 
 app.listen(SERVER_PORT, ()=> console.log(`The server is under attack at port ${SERVER_PORT}`))
