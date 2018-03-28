@@ -2,16 +2,15 @@ module.exports = {
 
     //=======patients controller=============
     createEvent: (req, res) => {
-            console.log("Hit The server")
-            let userId = 1
-            console.log("test", req.body);
-            const db = app.get('db')
-            let {event_name, event_description, start_date, end_date, age_min, age_max, address, city, zipcode, privacy} = req.body;
-            // console.log(req.user);
-            db.create_event([event_description, address, event_name, start_date, end_date, age_min, age_max, city, zipcode, privacy])
-            .then(response =>{
-                res.send(response)
-            })
+        const dbInstance = req.app.get('db');
+        console.log("test", req.body);
+        let {userId, event_name, event_description, start_date, end_date, age_min, age_max, address, city, zipcode, privacy} = req.body;
+        console.log(req.user);
+        dbInstance.create_event(userId, event_name, event_description, start_date, end_date, age_min, age_max, address, city, zipcode, privacy). then((response) =>{
+            console.log(response);
+            res.status(200).send('Event Created')
+
+        }).catch(console.log);
     },
     
     cancelEvent: (req, res, next) => {
