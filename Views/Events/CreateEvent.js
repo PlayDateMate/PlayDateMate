@@ -78,7 +78,7 @@ export default class CreateEvents extends Component{
     // }
     onPressButton() {
         console.log("this is the set state", this.state.event_name),
-        axios.post('http://192.168.3.135:3001/api/events', {
+        axios.post('http://192.168.0.172:3001/api/events', {
            event_name: this.state.event_name, 
             event_description: this.state.event_description, 
             start_date: this.state.start_date, 
@@ -97,7 +97,7 @@ export default class CreateEvents extends Component{
 
         cancelEvent(){
         // console.log(this.props.match.params.id);
-        axios.delete('http://192.168.3.177:3001/api/events/:id').then(response => {
+        axios.delete('http://192.168.0.172:3001/api/events/:id').then(response => {
             this.props.history.push('/Dashboard')
         }).catch(console.log)
     }
