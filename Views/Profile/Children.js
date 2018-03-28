@@ -18,32 +18,20 @@ import{
 } from 'react-native';
 
 
-export default class Profile extends Component{
-    constructor(props){
-        super(props);
+export default class Children extends Component{
+    constructor(){
+        super();
         this.state={
             name: '',
             zip: '',
             email: '',
-            profilePicture: require('../../images/login2.jpg'),
+            profilePicture: '',
             canEdit: false, 
             userId:'',
-            children: [{id:1, user_id: 5, age: 3, child_name: "Tino", interests: "fun things"},{id:2, user_id: 5, age: 60, child_name: "Bob", interests: "boring things"}]
+         
         }
         this.onEdit = this.onEdit.bind(this);
         this.onSave = this.onSave.bind(this);
-    }
-    async componentDidMount(){
-        console.log("test front",this.props.navigation.state.params.id)
-        await axios.get('https://192.168.3.142/api/getUser/'+this.props.navigation.state.params.id).then((response)=>{
-            
-            this.setState({
-                name: response.data.response[0].user_name,
-                profilePicture: response.data.response[0].image
-            }).catch(function(err){
-                return err
-            })
-        })
     }
 
     onEdit(){
@@ -58,19 +46,9 @@ export default class Profile extends Component{
             canEdit:false
         })
     }
-
-    render(){
-        var children = this.state.children.map((child,i)=>{
-            return(
-                <View>
-                <Text>{child.child_name}</Text>
-                <Text>{child.age}</Text> 
-                <Text onPress={()=>this.props.navigation.navigate('Children', {parentId: this.state.userId, child: child})}>View Profile</Text>  
-
-
-                </View>
-            )
-        })
+   
+    render(){  
+        console.log("where are my kids??", this.props)
         return(
             <Container >
                 <Header>
@@ -80,7 +58,7 @@ export default class Profile extends Component{
                 }}/>
                     </Left>
                     <Body>
-                        <Title>Profile</Title>
+                        <Title>{this.props.navigation.state.params.child.child_name}</Title>
                     </Body>
                     <Right>
             
@@ -100,18 +78,20 @@ export default class Profile extends Component{
                
                 {this.state.canEdit ?
                 <View>
-                <Text >{this.state.name}</Text>
+                <Text >{this.props.navigation.state.params.child.child_name}</Text>
                 <TextInput></TextInput>
-                <Text>About</Text>
+                <Text>{this.props.navigation.state.params.child.age}</Text>
+                <TextInput></TextInput>
+                <Text>{this.props.navigation.state.params.child.interests}</Text>
                 <TextInput></TextInput>
                 </View>
             :
             <View>
-                <Text >{this.state.name}</Text>
+                <Text >{this.props.navigation.state.params.child.child_name}</Text>
                 
-             
                 
-                <Text>About</Text>
+                <Text>{this.props.navigation.state.params.child.age}</Text>
+                <Text>{this.props.navigation.state.params.child.interests}</Text>
                
                 </View>
             }
@@ -121,9 +101,6 @@ export default class Profile extends Component{
             <View>
                 {this.state.canEdit ? <Text onPress={()=>this.onSave()}>Save</Text> : <Text onPress={()=>this.onEdit()}>Edit</Text>}
                 
-            </View>
-            <View>
-            {children}
             </View>
 
            
@@ -135,4 +112,51 @@ export default class Profile extends Component{
     }
 }
 
+const styles = StyleSheet.create({
 
+    wrapper: {
+      paddingTop: 50,
+      flex: 1
+    },
+  
+    modal: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+  
+    modal2: {
+      height: 230,
+      backgroundColor: "#3B5998"
+    },
+  
+    modal3: {
+      height: 300,
+      width: 300
+    },
+  
+    modal4: {
+      height: 300
+    },
+  
+    btn: {
+      margin: 10,
+      backgroundColor: "#3B5998",
+      color: "white",
+      padding: 10
+    },
+  
+    btnModal: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      width: 50,
+      height: 50,
+      backgroundColor: "transparent"
+    },
+  
+    text: {
+      color: "black",
+      fontSize: 22
+    }
+  
+  });
