@@ -7,8 +7,9 @@ import Login from './Views/Login/Login';
 import Profile from './Views/Profile/Profile';
 import Chat from './Views/Chat/Chat'
 import FriendSearch from './Views/Friends/FriendSearch'
-import SearchEvents from './Views/Events/EventSearch'
-import EventCreate from './Views/Events/CreateEvent';
+import Search from './Views/Events/EventSearch'
+import Create from './Views/Events/CreateEvent';
+import Children from './Views/Profile/Children'
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import {
@@ -50,13 +51,13 @@ export default class App extends Component {
 
   const AppDrawerNavigator = DrawerNavigator({
     Login:{screen: Login},
+    Dashboard:{screen:Dashboard},
     Profile:{screen:Profile},
     Events: {screen:Events},
     Friends:{screen: Friends},
-    Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
     FriendSearch:{screen: FriendSearch},
-    
-    EventCreate: {screen: EventCreate},
-    SearchEvents: {screen: SearchEvents},
+    Create: {screen: Create},
+    Search: {screen: Search},
+    Children: {screen: Children}
 })

@@ -34,9 +34,13 @@ export default class CreateEvents extends Component{
             zipcodeInput: '',
             privacyInput: '',
             event: [],
+<<<<<<< HEAD
 
             event: {
                 id: '',
+=======
+                id: 1,
+>>>>>>> master
                 event_name: '',
                 event_description: '',
                 start_date: '',
@@ -47,8 +51,12 @@ export default class CreateEvents extends Component{
                 city: '',
                 zipcode: '',
                 privacy: '',
+<<<<<<< HEAD
                 user_id: 1
             }
+=======
+                userId: 1
+>>>>>>> master
             
         }
     this.nameInput =  this.nameInput.bind(this);
@@ -63,11 +71,36 @@ export default class CreateEvents extends Component{
     this.onPressButton = this.onPressButton.bind(this);
     }
 
+    
+    // componentDidMount() {
+    //     axios.get('/api/events/:id').then( response => {
+    //         let event = response.data
+    //         this.setState({
+    //             id: event.id, 
+    //             event_name: event.event_name, 
+    //             event_description: event.event_description, 
+    //             start_date: event.start_date, 
+    //             end_date: event.end_date, 
+    //             age_min: event.age_min, 
+    //             age_max: event.age_max, 
+    //             address: event.address, 
+    //             city: event.city, 
+    //             zipcode: event.zipcode, 
+    //             privacy: event.privacy 
+    //         })
+    //     }).catch(console.log)
+    // }
     onPressButton() {
+<<<<<<< HEAD
         console.log("Hit!")
         axios.post('http://192.168.3.177:3001/api/events', {
             id: this.props.id,
             event_name: this.state.event_name, 
+=======
+        console.log("this is the set state", this.state.event_name),
+        axios.post('http://192.168.3.135:3001/api/events', {
+           event_name: this.state.event_name, 
+>>>>>>> master
             event_description: this.state.event_description, 
             start_date: this.state.start_date, 
             end_date: this.state.end_date, 
@@ -77,6 +110,7 @@ export default class CreateEvents extends Component{
             city: this.state.city, 
             zipcode: this.state.zipcode, 
             privacy: this.state.privacy
+<<<<<<< HEAD
         })
         .then((response) => {
             console.log("Test", response.data);
@@ -107,6 +141,13 @@ export default class CreateEvents extends Component{
     //            })
     //     }).catch(console.log)
     //   }
+=======
+            }).then((res) => {
+            console.log(res.data);
+                return res.data
+            })
+        }
+>>>>>>> master
 
         cancelEvent(){
         // console.log(this.props.match.params.id);
@@ -120,6 +161,7 @@ export default class CreateEvents extends Component{
         this.setState({
             event_name: val
         })
+        console.log("StateName:", this.state.event_name)
     }
     descriptionInput(val) {
         console.log(val);
@@ -127,6 +169,7 @@ export default class CreateEvents extends Component{
             event_description: val
         })
     }
+
     startdateInput(val) {
         console.log(val);
         this.setState({
@@ -184,8 +227,13 @@ export default class CreateEvents extends Component{
                
                 <TextInput
                 onChangeText={(val) => this.nameInput(val)}
+<<<<<<< HEAD
                 style={styles.input} placeholder="Event Name"
                 
+=======
+                style={styles.input} placeholder="Event Name" 
+                /* type = 'text' */
+>>>>>>> master
                 />
                 <TextInput
                     onChangeText={(val) => this.descriptionInput(val)}
@@ -193,7 +241,12 @@ export default class CreateEvents extends Component{
                 />
                 <TextInput
                     onChangeText={(val) => this.startdateInput(val)}
+<<<<<<< HEAD
                     style={styles.input} placeholder="Start Date" 
+=======
+                    style={styles.input} placeholder="Start Date"
+                    /* type = "date"  */
+>>>>>>> master
                 />
                 <TextInput
                     onChangeText={(val) => this.enddateInput(val)}

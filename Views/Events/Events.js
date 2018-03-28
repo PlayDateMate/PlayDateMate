@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
-import {Icon, Button, Container, Header, Content, Left, Body, Title, Right} from 'native-base'
+import {Icon, Button, Container, Header, Content, Left, Body, Title, Right} from 'native-base';
+
 
 
 import{
     StyleSheet, 
     Text,
-    View
+    View,
+    Dimensions
 } from 'react-native';
 
 export default class Events extends Component{
@@ -58,9 +60,11 @@ export default class Events extends Component{
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-        <View style = {styles.ButtonContainer}> 
-            <View onPress={() => this.props.navigation.navigate('CreateEvent',{id:this.state.userId})} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Create Events</Text></View>
-            <View onPress= {() => this.props.navigation.navigate('EventSearch',{id:this.state.userId})} style = {styles.ButtonBorder}><Text style = {{color:'white', fontSize: 15}}>Search Events</Text></View>
+        <View style = {styles.ButtonContainer}>
+        {/* <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Create',{id:this.state.userId})}>Create</Text>
+        <Text style={{color:'red'}} onPress={()=> this.props.navigation.navigate('Search',{id:this.state.userId})}>Search</Text>  */}
+            <Text onPress={() => this.props.navigation.navigate('Create',{id:this.state.userId})} style = {styles.ButtonBorder}>Create Events</Text>
+            <Text onPress={() => this.props.navigation.navigate('Search',{id:this.state.userId})} style = {styles.ButtonBorder}>Search Events</Text>
         </View>
                 <View style={styles.Invitations}><Text>Invitations</Text></View>
                 <View style={styles.MyEvents}><Text>My Events</Text>
@@ -76,6 +80,7 @@ export default class Events extends Component{
 const styles = StyleSheet.create({
     ButtonContainer:{
         justifyContent: 'center',
+        alignItems: 'center',
         flexDirection:'row'
     },
     ButtonBorder:{
@@ -88,7 +93,10 @@ const styles = StyleSheet.create({
         padding: 4,
         marginTop: 20,
         width: 150,
-        marginRight: 20
+        marginRight: 20,
+        fontSize: 15,
+        color: 'white',
+      
     },
     Invitations:{
         flex: .5,
@@ -96,7 +104,8 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         marginTop: 20,
         width: 300,
-        alignItems: 'center'
+        
+        
     },
     MyEvents:{
         flex:2,

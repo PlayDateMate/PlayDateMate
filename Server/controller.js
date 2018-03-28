@@ -2,13 +2,21 @@ module.exports = {
 
     //=======events controller=============
     createEvent: (req, res) => {
+<<<<<<< HEAD
         // let user_id = 1
         console.log("test", req.body);
         let {event_description, address, event_name, start_date, end_date, age_min, age_max, city, zipcode, privacy} = req.body;
         console.log(req.user);
         req.app.get('db').create_event(event_description, address, event_name, start_date, end_date, age_min, age_max, city, zipcode, privacy). then((response) =>{
+=======
+        const dbInstance = req.app.get('db');
+        console.log("test", req.body);
+        let {userId, event_name, event_description, start_date, end_date, age_min, age_max, address, city, zipcode, privacy} = req.body;
+        console.log(req.user);
+        dbInstance.create_event(userId, event_name, event_description, start_date, end_date, age_min, age_max, address, city, zipcode, privacy). then((response) =>{
+>>>>>>> master
             console.log(response);
-            res.status(200).send(response)
+            res.status(200).send('Event Created')
 
         }).catch(console.log);
     },
