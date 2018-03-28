@@ -51,10 +51,10 @@ export default class App extends Component {
 
   const AppDrawerNavigator = DrawerNavigator({
     Login:{screen: Login},
+    Dashboard:{screen:Dashboard},
     Profile:{screen:Profile},
     Events: {screen:Events},
     Friends:{screen: Friends},
-    Dashboard:{screen:Dashboard},
     Chat:{screen: Chat},
     FriendSearch:{screen: FriendSearch},
     Create: {screen: Create},

@@ -34,7 +34,7 @@ export default class Events extends Component{
             <Header>
                 <Left >
                 <Icon name = "home" onPress = {()=>{
-                this.props.navigation.navigate('Dashboard', {id: this.state.userId})
+                this.props.navigation.navigate('DrawerOpen', {id: this.state.userId})
             }}/>
                 </Left>
                 <Body>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StackNavigator} from 'react-navigation';
+import {DrawerNavigator} from 'react-navigation';
 import {Icon, Button, Container, Header, Content, Left, Body, Title, Right} from 'native-base'
        
 
